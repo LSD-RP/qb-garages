@@ -19,11 +19,11 @@ QBCore.Functions.CreateCallback("qb-garage:server:GetGarageVehicles", function(s
                 --Check vehicle type against depot type
                 for _, vehicle in pairs(result) do
                     if not OutsideVehicles[vehicle.plate] or not DoesEntityExist(OutsideVehicles[vehicle.plate].entity) then
-                        if category == "air" and ( QBCore.Shared.Vehicles[vehicle.vehicle].category == "helicopters" or QBCore.Shared.Vehicles[vehicle.vehicle].category == "planes" ) then
+                        if category == "air" and ( QBCore.Shared.Vehicles[vehicle.vehicle].category == "helicopters" or QBCore.Shared.Vehicles[vehicle.vehicle].category == "planes" or QBCore.Shared.Vehicles[vehicle.vehicle].category == "helis" ) then
                             tosend[#tosend + 1] = vehicle
-                        elseif category == "sea" and QBCore.Shared.Vehicles[vehicle.vehicle].category == "boats" then
+                        elseif category == "sea" and QBCore.Shared.Vehicles[vehicle.vehicle].shop == "boats" then
                             tosend[#tosend + 1] = vehicle
-                        elseif category == "car" and QBCore.Shared.Vehicles[vehicle.vehicle].category ~= "helicopters" and QBCore.Shared.Vehicles[vehicle.vehicle].category ~= "planes" and QBCore.Shared.Vehicles[vehicle.vehicle].category ~= "boats" then
+                        elseif category == "car" and QBCore.Shared.Vehicles[vehicle.vehicle].category ~= "helicopters" and QBCore.Shared.Vehicles[vehicle.vehicle].category ~= "planes" and QBCore.Shared.Vehicles[vehicle.vehicle].shop ~= "boats" then
                             tosend[#tosend + 1] = vehicle
                         end
                     end
@@ -301,4 +301,8 @@ QBCore.Functions.CreateCallback('qb-garage:server:GetPlayerVehicles', function(s
             cb(nil)
         end
     end)
+end)
+
+QBCore.Functions.CreateCallback('qb-garage:server:GetGarages', function(source, cb)
+    cb(Garages)
 end)

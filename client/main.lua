@@ -285,6 +285,7 @@ RegisterNetEvent("qb-garages:client:VehicleList", function(data)
                 local enginePercent = round(v.engine / 10, 0)
                 local bodyPercent = round(v.body / 10, 0)
                 local currentFuel = v.fuel
+                if v.vehicle == "MUSTANG" then v.vehicle = "boss429" end
                 local vname = QBCore.Shared.Vehicles[v.vehicle].name
 
                 if v.state == 0 then
